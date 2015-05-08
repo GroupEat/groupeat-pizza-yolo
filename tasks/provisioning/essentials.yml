@@ -1,0 +1,19 @@
+---
+- name: Install basic packages
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - build-essential
+    - curl
+    - dos2unix
+    - gcc
+    - libmcrypt4
+    - libpcre3-dev
+    - make
+    - re2c
+    - whois
+    - vim
+    - htop
+    - unzip
+    - wget
+    - python-pygments

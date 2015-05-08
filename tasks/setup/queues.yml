@@ -1,0 +1,4 @@
+---
+- name: Upload queues configuration file
+  template: src=templates/queues.j2 dest=/etc/supervisor/conf.d/queues.conf
+  notify: restart groupeat queues

@@ -1,0 +1,9 @@
+---
+- name: Add vagrant user
+  user: name=vagrant group=vagrant generate_ssh_key=yes
+
+- name: Add local ssh key to vagrant user
+  authorized_key: user=vagrant key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Upload vagrant .profile
+  template: src=templates/vagrant_profile.j2 dest=~vagrant/.profile

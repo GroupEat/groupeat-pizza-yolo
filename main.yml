@@ -1,0 +1,5 @@
+---
+- hosts: groupeat-prod
+  remote_user: root
+  roles:
+    - { role: . }

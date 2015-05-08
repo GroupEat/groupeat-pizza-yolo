@@ -1,0 +1,44 @@
+---
+- name: Install PHP
+  apt: name={{ item }}
+  with_items:
+    - php5-cli
+    - php5-dev
+    - php-pear
+    - php5-pgsql
+    - php5-json
+    - php5-curl
+    - php5-gd
+    - php5-gmp
+    - php5-imap
+    - php5-mcrypt
+    - php5-intl
+
+- name: Install PHP APCu
+  apt: name=php5-apcu
+
+- name: Enable MCrypt extension
+  shell: php5enmod mcrypt
+  args:
+    creates: /etc/php5/cli/conf.d/20-mcrypt.ini
+
+- name: Install Mailparse PECL extension
+  shell: pecl install mailparse
+  register: mailparse_result
+  changed_when: "'already installed' not in mailparse_result.stdout"
+  failed_when: "mailparse_result.stderr or ('ERROR' in mailparse_result.stdout)"
+
+- name: Create mailparse.ini file
+  template: src=templates/mailparse.ini.j2 dest=/etc/php5/mods-available/mailparse.ini mode=644
+
+- name: Enable Mailparse
+  file: src=/etc/php5/mods-available/mailparse.ini dest=/etc/php5/cli/conf.d/20-mailparse.ini state=link
+
+- name: Install Composer
+  shell: curl -sS https://getcomposer.org/installer | /usr/bin/php && /bin/mv -f composer.phar /usr/local/bin/composer
+  args:
+    creates: /usr/local/bin/composer
+  notify: source vagrant profile
+
+- name: Upload php.ini for CLI
+  template: src=templates/php_cli.ini.j2 dest=/etc/php5/cli/php.ini mode=644

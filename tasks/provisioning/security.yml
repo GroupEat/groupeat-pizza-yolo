@@ -1,0 +1,9 @@
+---
+- name: Install persistent iptables
+  apt: name=iptables-persistent
+
+- name: Install fail2ban
+  apt: name=fail2ban
+
+- name: Install unattended-upgrades
+  apt: name=unattended-upgrades

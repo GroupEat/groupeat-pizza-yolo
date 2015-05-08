@@ -1,0 +1,23 @@
+---
+- include: provisioning/locale.yml
+- include: provisioning/vagrant_user.yml
+- include: provisioning/timezone.yml
+- include: provisioning/ppas.yml
+- include: provisioning/essentials.yml
+- include: provisioning/php.yml
+- include: provisioning/nginx_php_fpm.yml
+- include: provisioning/postgresql.yml
+- include: provisioning/beanstalk.yml
+- include: provisioning/aglio.yml
+- include: provisioning/supervisor.yml
+- include: provisioning/zsh.yml
+- include: provisioning/security.yml
+- include: setup/oh_my_zsh.yml user=root
+- include: setup/oh_my_zsh.yml user=vagrant
+- include: setup/nginx.yml
+- include: setup/queues.yml
+- include: setup/crontab.yml
+- include: setup/papertrail.yml
+- include: setup/postgresql.yml
+- include: setup/shippable.yml
+- include: setup/security.yml

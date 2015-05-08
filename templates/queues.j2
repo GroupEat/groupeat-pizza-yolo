@@ -1,0 +1,9 @@
+[program:groupeat]
+directory=/home/vagrant/api/current
+command=/usr/bin/php artisan queue:listen
+autostart=true
+autorestart=true
+startretries=3
+stdout_logfile=/var/log/queues/groupeat.out.log
+stderr_logfile=/var/log/queues/groupeat.err.log
+user=vagrant

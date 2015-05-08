@@ -1,0 +1,30 @@
+---
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart php-fpm
+  service: name=php5-fpm state=restarted
+
+- name: restart beanstalk
+  service: name=beanstalkd state=restarted
+
+- name: restart groupeat queues
+  supervisorctl: name=groupeat state=restarted
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: restart postgresql
+  service: name=postgresql state=restarted
+
+- name: restart ssh
+  service: name=ssh state=restarted
+  notify: add ssh missing keys
+
+- name: add ssh missing keys
+  shell: ssh-keygen -A
+
+- name: source vagrant profile
+  shell: source ~vagrant/.profile
+  sudo: yes
+  sudo_user: vagrant

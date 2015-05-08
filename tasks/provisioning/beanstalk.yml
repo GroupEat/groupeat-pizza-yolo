@@ -1,0 +1,4 @@
+---
+- name: Install Beanstlalk
+  apt: name=beanstalkd
+  notify: restart beanstalk

@@ -1,0 +1,26 @@
+---
+- name: Install common software
+  apt: name=software-properties-common
+
+- name: Add nginx repository
+  apt_repository: repo='ppa:nginx/stable'
+
+- name: Add PHP repository
+  apt_repository: repo='ppa:ondrej/php5-5.6'
+
+- name: Add Node.js repository
+  apt_repository: repo='ppa:chris-lea/node.js'
+
+- name: Add PostgreSQL apt key
+  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
+
+- name: Add PostgreSQL repository
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
+
+- name: Update package lists
+  apt: update_cache=yes cache_valid_time={{ apt_update_cache_time_in_seconds }}
+  when: apt_update
+
+- name: Upgrade packages
+  apt: upgrade=yes
+  when: apt_update

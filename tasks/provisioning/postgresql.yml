@@ -1,0 +1,8 @@
+---
+- name: Install postgreSQL
+  apt: name={{ item }}
+  with_items:
+    - libpq-dev
+    - python-psycopg2
+    - postgresql-9.4
+    - postgresql-contrib-9.4

@@ -1,0 +1,19 @@
+DISABLE_AUTO_UPDATE="true"
+
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME="ys"
+
+plugins=(composer git laravel5 colored-man colorize dircycle jump)
+
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+source $ZSH/oh-my-zsh.sh
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias h='cd ~'
+alias c='clear'
+alias cat="colorize"
+
+source ~/.profile

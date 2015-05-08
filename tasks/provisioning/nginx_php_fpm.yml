@@ -1,0 +1,34 @@
+---
+- name: Install nginx
+  apt: name=nginx
+
+- name: Install PHP-FPM
+  apt: name=php5-fpm
+
+- name: Removing default site
+  file: path={{ item }} state=absent
+  with_items:
+    - /etc/nginx/sites-enabled/default
+    - /etc/nginx/sites-available/default
+  notify: restart nginx
+
+- name: Upload php.ini file
+  template: src=templates/php_fpm.ini.j2 dest=/etc/php5/fpm/php.ini mode=644
+
+- name: Upload fastcgi_params file
+  template: src=templates/fastcgi_params.j2 dest=/etc/nginx/fastcgi_params mode=644
+
+- name: Upload nginx.conf file
+  template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf mode=644
+
+- name: Upload www.conf file
+  template: src=templates/www.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf mode=644
+
+- name: List vagrant user groups
+  shell: groups vagrant
+  changed_when: False
+  register: vagrant_groups
+
+- name: Add the vagrant user to the www-data group
+  shell: usermod -a -G www-data vagrant
+  when: "not 'www-data' in vagrant_groups.stdout"
