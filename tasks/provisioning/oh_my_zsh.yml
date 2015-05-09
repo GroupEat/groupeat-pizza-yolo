@@ -5,14 +5,10 @@
   sudo_user: "{{ user }}"
 
 - name: Upload .zshrc for {{ user }} user
-  template: src=templates/zshrc_{{ user }}.j2 dest=~{{ user }}/.zshrc
-  sudo: yes
-  sudo_user: "{{ user }}"
+  template: src=templates/zshrc_{{ user }}.j2 dest=~{{ user }}/.zshrc group={{ user }} owner={{ user }}
 
 - name: Set ZSH to default shell for {{ user }} user
   user: name={{ user }} shell=/bin/zsh
 
 - name: Upload ys theme for {{ user }} user
-  template: src=templates/ys.theme.j2 dest=~{{ user }}/.oh-my-zsh/themes/ys.zsh-theme
-  sudo: yes
-  sudo_user: "{{ user }}"
+  template: src=templates/ys.theme.j2 dest=~{{ user }}/.oh-my-zsh/themes/ys.zsh-theme group={{ user }} owner={{ user }}

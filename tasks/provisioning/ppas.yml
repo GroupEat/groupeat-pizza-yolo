@@ -22,5 +22,5 @@
   when: apt_update
 
 - name: Upgrade packages
-  apt: upgrade=yes
+  apt: upgrade=safe
   when: apt_update
