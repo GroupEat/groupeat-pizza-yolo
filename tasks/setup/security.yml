@@ -2,3 +2,21 @@
 - name: Upload SSH daemon config
   template: src=templates/sshd_config.j2 dest=/etc/ssh/sshd_config
   notify: Restart ssh
+
+- name: Upload APT update config
+  template: src=templates/apt_periodic.j2 dest=/etc/apt/apt.conf.d/02periodic
+
+- name: Upload unattended updates config
+  template: src=templates/unattended_upgrades.j2 dest=/etc/apt/apt.conf.d/50unattended-upgrades
+
+- name: Setup ufw to deny packages by default
+  ufw: state=enabled policy=deny
+
+- name: Allow ssh traffic
+  ufw: rule=allow port=22 proto=tcp
+
+- name: Allow HTTP traffic
+  ufw: rule=allow port=80 proto=tcp
+
+- name: Allow HTTPS traffic
+  ufw: rule=allow port=443 proto=tcp

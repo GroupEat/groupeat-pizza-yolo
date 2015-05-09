@@ -1,6 +1,6 @@
 ---
-- name: Install persistent iptables
-  apt: name=iptables-persistent
+- name: Install ufw
+  apt: name=ufw
 
 - name: Install fail2ban
   apt: name=fail2ban
