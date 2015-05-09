@@ -6,6 +6,6 @@
 
 - name: Create groupeat user and allow access to the db
   postgresql_user: db=groupeat name=groupeat password={{ pgsql_password }} role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
-  notify: restart postgresql
+  notify: Restart postgresql
   sudo: yes
   sudo_user: postgres

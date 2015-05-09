@@ -10,7 +10,7 @@
   with_items:
     - /etc/nginx/sites-enabled/default
     - /etc/nginx/sites-available/default
-  notify: restart nginx
+  notify: Restart nginx
 
 - name: Upload php.ini file
   template: src=templates/php_fpm.ini.j2 dest=/etc/php5/fpm/php.ini mode=644

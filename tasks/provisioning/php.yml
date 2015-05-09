@@ -38,7 +38,7 @@
   shell: curl -sS https://getcomposer.org/installer | /usr/bin/php && /bin/mv -f composer.phar /usr/local/bin/composer
   args:
     creates: /usr/local/bin/composer
-  notify: source vagrant profile
+  notify: Source vagrant profile
 
 - name: Upload php.ini for CLI
   template: src=templates/php_cli.ini.j2 dest=/etc/php5/cli/php.ini mode=644
