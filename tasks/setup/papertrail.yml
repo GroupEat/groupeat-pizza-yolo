@@ -2,3 +2,6 @@
   - name: Configure Papertrail logging
     template: src=templates/rsyslog.conf.j2 dest=/etc/rsyslog.conf
     notify: Restart rsyslog
+
+  - name: Download Papertrail certificate
+    get_url: url=https://papertrailapp.com/tools/papertrail-bundle.pem dest=/etc/papertrail-bundle.pem

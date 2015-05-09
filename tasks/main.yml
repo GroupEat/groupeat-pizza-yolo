@@ -21,3 +21,5 @@
 - include: setup/postgresql.yml
 - include: setup/shippable.yml
 - include: setup/security.yml
+- include: setup/laravel_env.yml
+- include: setup/github.yml

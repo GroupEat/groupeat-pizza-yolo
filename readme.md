@@ -1,3 +1,3 @@
  - [Install Ansible](http://docs.ansible.com/intro_installation.html) on your machine.
- - Configure the `groupeat-prod` group in your [Ansible Inventory file](http://docs.ansible.com/intro_inventory.html).
- - Run the `ansible-playbook main.yml` command in the project root folder.
+ - Tweak the `production` [inventory file](http://docs.ansible.com/intro_inventory.html) if needed.
+ - Run the `ansible-playbook main.yml -i production --ask-vault-pass` command in the project root folder.
