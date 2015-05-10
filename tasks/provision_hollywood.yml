@@ -1,0 +1,8 @@
+---
+- name: Install Hollywood
+  apt: name=hollywood state=present
+  register: hollywood
+
+- name: Run "updatedb" command
+  shell: updatedb
+  when: hollywood.changed

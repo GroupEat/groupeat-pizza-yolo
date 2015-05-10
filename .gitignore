@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+.vagrant
+.vault_pass
+package.box

@@ -1,0 +1,13 @@
+---
+- include: provision_timezone.yml
+- include: provision_ppas.yml
+- include: provision_essentials.yml
+- include: provision_php.yml
+- include: provision_php_xdebug.yml
+- include: provision_nginx_php_fpm.yml
+- include: provision_postgresql.yml
+- include: provision_aglio.yml
+- include: provision_zsh.yml
+- include: setup_oh_my_zsh.yml user=root
+- include: setup_oh_my_zsh.yml user=vagrant
+- include: setup_php_no_cache.yml
