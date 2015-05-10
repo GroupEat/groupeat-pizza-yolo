@@ -1,9 +1,0 @@
----
-- name: Install ufw
-  apt: name=ufw
-
-- name: Install fail2ban
-  apt: name=fail2ban
-
-- name: Install unattended-upgrades
-  apt: name=unattended-upgrades

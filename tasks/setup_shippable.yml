@@ -1,0 +1,3 @@
+---
+- name: Add Shippable RSA key to vagrant authorized keys
+  authorized_key: user=vagrant key="{{ shippable_public_key }}" state=present

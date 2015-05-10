@@ -1,6 +1,6 @@
 ---
 - name: Install PHP
-  apt: name={{ item }}
+  apt: name={{ item }} state=present
   with_items:
     - php5-cli
     - php5-dev
@@ -13,9 +13,6 @@
     - php5-imap
     - php5-mcrypt
     - php5-intl
-
-- name: Install PHP APCu
-  apt: name=php5-apcu
 
 - name: Enable MCrypt extension
   shell: php5enmod mcrypt
@@ -38,7 +35,6 @@
   shell: curl -sS https://getcomposer.org/installer | /usr/bin/php && /bin/mv -f composer.phar /usr/local/bin/composer
   args:
     creates: /usr/local/bin/composer
-  notify: Source vagrant profile
 
 - name: Upload php.ini for CLI
   template: src=templates/php_cli.ini.j2 dest=/etc/php5/cli/php.ini mode=644

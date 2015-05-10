@@ -1,6 +1,6 @@
 ---
 - name: Set locale
-  lineinfile: dest=/etc/environment line="LC_ALL=\"en_US.UTF-8\""
+  lineinfile: dest=/etc/environment line="LC_ALL=\"en_US.UTF-8\"" state=present
   register: locale
 
 - name: Reboot server

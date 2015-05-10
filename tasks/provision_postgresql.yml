@@ -1,6 +1,6 @@
 ---
 - name: Install postgreSQL
-  apt: name={{ item }}
+  apt: name={{ item }} state=present
   with_items:
     - libpq-dev
     - python-psycopg2

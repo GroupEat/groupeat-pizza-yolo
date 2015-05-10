@@ -23,8 +23,3 @@
 
 - name: Add ssh missing keys
   shell: ssh-keygen -A
-
-- name: Source vagrant profile
-  shell: source ~vagrant/.profile
-  sudo: yes
-  sudo_user: vagrant

@@ -1,0 +1,6 @@
+---
+- name: Install Node.js
+  apt: name=nodejs state=present
+
+- name: Install Aglio globally
+  npm: global=yes name=aglio production=yes state=present

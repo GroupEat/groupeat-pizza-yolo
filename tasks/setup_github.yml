@@ -6,15 +6,19 @@
     state: present
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
     regexp: "^github\\.com"
+    state: present
+
+- name: Add .composer directory for vagrant
+  file: path=~vagrant/.composer state=directory group=vagrant owner=vagrant mode=775
 
 - name: Add GitHub access token to Composer config
-  template: src=templates/composer_auth.json.j2 dest=~vagrant/.composer/auth.json group=vagrant owner=vagrant
+  template: src=composer_auth.json.j2 dest=~vagrant/.composer/auth.json group=vagrant owner=vagrant
 
 - name: Upload RSA public key for GitHub
-  template: src=templates/github_public_rsa.j2 dest=~vagrant/.ssh/github_id_rsa.pub group=vagrant owner=vagrant mode=644
+  template: src=github_id_rsa.pub.j2 dest=~vagrant/.ssh/github_id_rsa.pub group=vagrant owner=vagrant mode=644
 
-- name: Upload RSA private key for GitHub
-  copy: src=secrets/github_rsa dest=~vagrant/.ssh/github_id_rsa.enc group=vagrant owner=vagrant mode=600
+- name: Upload encrypted RSA private key for GitHub
+  copy: src=github_id_rsa.enc dest=~vagrant/.ssh/github_id_rsa.enc group=vagrant owner=vagrant mode=600
   register: github_rsa_private
 
 - name: Decrypt RSA private key for GitHub
@@ -24,5 +28,5 @@
   sudo_user: vagrant
 
 - name: Upload vagrant ssh config
-  template: src=templates/vagrant_ssh_config.j2 dest=~vagrant/.ssh/config group=vagrant owner=vagrant mode=640
+  template: src=vagrant_ssh_config.j2 dest=~vagrant/.ssh/config group=vagrant owner=vagrant mode=640
   notify: Restart ssh

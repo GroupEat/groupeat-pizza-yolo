@@ -1,9 +1,9 @@
 ---
 - name: Install nginx
-  apt: name=nginx
+  apt: name=nginx state=present
 
 - name: Install PHP-FPM
-  apt: name=php5-fpm
+  apt: name=php5-fpm state=present
 
 - name: Removing default site
   file: path={{ item }} state=absent

@@ -1,11 +1,11 @@
 ---
 - name: Create groupeat PostgreSQL database
-  postgresql_db: name=groupeat
+  postgresql_db: name=groupeat state=present
   sudo: yes
   sudo_user: postgres
 
 - name: Create groupeat user and grant him access to the db
-  postgresql_user: db=groupeat name=groupeat password={{ pgsql_password }} role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
+  postgresql_user: db=groupeat name=groupeat password={{ pgsql_password }} state=present role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
   notify: Restart postgresql
   sudo: yes
   sudo_user: postgres

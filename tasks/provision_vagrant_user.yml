@@ -1,0 +1,9 @@
+---
+- name: Add vagrant group
+  group: name=vagrant state=present
+
+- name: Add vagrant user
+  user: name=vagrant group=vagrant generate_ssh_key=yes state=present
+
+- name: Add local ssh key to vagrant user
+  authorized_key: user=vagrant key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" state=present

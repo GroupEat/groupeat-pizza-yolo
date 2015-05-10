@@ -5,16 +5,16 @@
 - name: Create nginx SSL directory
   file: path=/etc/nginx/ssl state=directory
 
-- name: Upload nginx SSL certificate
-  copy: src=secrets/nginx.crt dest=/etc/nginx/ssl/nginx.crt.enc mode=640
+- name: Upload encrypted nginx SSL certificate
+  copy: src=nginx.crt.enc dest=/etc/nginx/ssl/nginx.crt.enc mode=640
   register: nginx_certificate
 
 - name: Decrypt nginx SSL certificate
   shell: openssl enc -aes-256-cbc -salt -d -in /etc/nginx/ssl/nginx.crt.enc -out /etc/nginx/ssl/nginx.crt -k {{ secrets_password }}; chmod 640 /etc/nginx/ssl/nginx.crt
   when: nginx_certificate.changed
 
-- name: Upload nginx SSL private key
-  copy: src=secrets/nginx.key dest=/etc/nginx/ssl/nginx.key.enc mode=640
+- name: Upload encrypted nginx SSL private key
+  copy: src=nginx.key.enc dest=/etc/nginx/ssl/nginx.key.enc mode=640
   register: nginx_private_key
 
 - name: Decrypt nginx SSL private key
