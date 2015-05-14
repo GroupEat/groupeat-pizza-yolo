@@ -9,8 +9,11 @@
 - name: Upload unattended updates config
   template: src=templates/unattended_upgrades.j2 dest=/etc/apt/apt.conf.d/50unattended-upgrades
 
-- name: Setup ufw to deny packages by default
-  ufw: state=enabled policy=deny
+- name: Setup ufw to deny incoming packages by default
+  ufw: state=enabled policy=deny direction=incoming
+
+- name: Setup ufw to allow outgoing packages by default
+  ufw: state=enabled policy=allow direction=outgoing
 
 - name: Allow ssh traffic
   ufw: rule=allow port=22 proto=tcp

@@ -21,5 +21,8 @@
   service: name=ssh state=restarted
   notify: Add ssh missing keys
 
+- name: Reconfigure timezone
+  shell: dpkg-reconfigure -f noninteractive tzdata
+
 - name: Add ssh missing keys
   shell: ssh-keygen -A

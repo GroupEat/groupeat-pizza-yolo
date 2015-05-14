@@ -1,7 +1,5 @@
 ---
-- include: provision_locale.yml
 - include: provision_vagrant_user.yml
-- include: provision_timezone.yml
 - include: provision_ppas.yml
 - include: provision_essentials.yml
 - include: provision_php.yml
@@ -12,7 +10,10 @@
 - include: provision_aglio.yml
 - include: provision_supervisor.yml
 - include: provision_zsh.yml
-- include: provision_security.yml
+- include: provision_rsyslog.yml
+- include: provision_security.yml tags=security
+- include: setup_locale.yml
+- include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
 - include: setup_nginx.yml
@@ -21,6 +22,6 @@
 - include: setup_papertrail.yml
 - include: setup_postgresql.yml
 - include: setup_shippable.yml
-- include: setup_security.yml
+- include: setup_security.yml tags=security
 - include: setup_laravel_env.yml
 - include: setup_github.yml
