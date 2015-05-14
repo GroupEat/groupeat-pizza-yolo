@@ -4,7 +4,11 @@ echo "Cd into project root"
 cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 projectRoot=$( pwd )
 
-ansible-playbook prod.yml -i hosts --ask-vault-pass
+if [ ! -f .vault_pass ]; then
+    ansible-playbook prod.yml -i hosts --ask-vault-pass -vv
+else
+    ansible-playbook prod.yml -i hosts --vault-password-file .vault_pass -vv
+fi
 
 if ssh vagrant@groupeat.fr "[ -d ~vagrant/api/current ]"; then
     echo "The ~vagrant/api/current directory already exists, the API should be live."
