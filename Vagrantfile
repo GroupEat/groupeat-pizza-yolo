@@ -4,18 +4,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "PizzeriaDev"
 
-    config.ssh.insert_key = false
+    config.vm.network "private_network", ip: "192.168.10.9"
 
-    ['/root', '/home/vagrant'].each do |path|
-        config.vm.provision "shell" do |s|
-          s.inline = "echo \"$1\" | grep -xq \"$1\" #{path}/.ssh/authorized_keys || echo \"$1\" | tee -a #{path}/.ssh/authorized_keys"
-          s.args = [File.read(File.expand_path("~/.ssh/id_rsa.pub"))]
-        end
+    config.vm.provision "shell" do |s|
+      s.inline = "cp ~vagrant/.ssh/authorized_keys ~root/.ssh/authorized_keys"
     end
 
     config.vm.provision "ansible" do |ansible|
         ansible.verbose = "vvvv"
         ansible.playbook = "dev.yml"
         ansible.vault_password_file = ".vault_pass"
+    end
+
+    config.vm.provision "shell" do |s|
+        s.inline = "echo \"Reducting box size\"; apt-get clean -y; apt-get autoclean -y; rm -rf /usr/src/vboxguest* /usr/src/virtualbox-ose-guest*; rm -rf /usr/src/linux-headers*; rm -rf /temp/*"
     end
 end
