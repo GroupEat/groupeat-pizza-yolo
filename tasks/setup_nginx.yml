@@ -1,6 +1,8 @@
 ---
 - name: Upload GroupEat site config
   template: src=templates/groupeat.nginx.conf.j2 dest=/etc/nginx/sites-available/groupeat
+  notify:
+    - Restart nginx
 
 - name: Create nginx SSL directory
   file: path=/etc/nginx/ssl state=directory
