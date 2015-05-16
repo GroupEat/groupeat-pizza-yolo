@@ -4,7 +4,7 @@
 - include: provision_essentials.yml
 - include: provision_php.yml
 - include: provision_php_apcu.yml
-- include: provision_nginx_php_fpm.yml
+- include: provision_nginx_php_fpm.yml tags=nginx
 - include: provision_postgresql.yml
 - include: provision_beanstalk.yml
 - include: provision_aglio.yml
@@ -16,12 +16,13 @@
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
-- include: setup_nginx.yml
+- include: setup_nginx.yml tags=nginx
 - include: setup_queues.yml
 - include: setup_crontab.yml
 - include: setup_papertrail.yml
 - include: setup_postgresql.yml
 - include: setup_shippable.yml
 - include: setup_security.yml tags=security
-- include: setup_laravel_env.yml
+- include: setup_laravel_env.yml tags=deploy
 - include: setup_github.yml
+- include: setup_deploy.yml tags=deploy

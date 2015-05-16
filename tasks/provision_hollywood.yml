@@ -4,5 +4,5 @@
   register: hollywood
 
 - name: Run "updatedb" command
-  shell: updatedb
   when: hollywood.changed
+  shell: updatedb

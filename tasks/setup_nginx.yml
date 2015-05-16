@@ -1,27 +1,30 @@
 ---
 - name: Upload GroupEat site config
-  template: src=templates/groupeat.nginx.conf.j2 dest=/etc/nginx/sites-available/groupeat
+  template: src=templates/{{ inventory_hostname }}.nginx.conf.j2 dest=/etc/nginx/sites-available/groupeat
   notify:
     - Restart nginx
 
 - name: Create nginx SSL directory
+  when: ssl_enabled
   file: path=/etc/nginx/ssl state=directory
 
 - name: Upload encrypted nginx SSL certificate
+  when: ssl_enabled
   copy: src=nginx.crt.enc dest=/etc/nginx/ssl/nginx.crt.enc mode=640
   register: nginx_certificate
 
 - name: Decrypt nginx SSL certificate
-  shell: openssl enc -aes-256-cbc -salt -d -in /etc/nginx/ssl/nginx.crt.enc -out /etc/nginx/ssl/nginx.crt -k {{ secrets_password }}; chmod 640 /etc/nginx/ssl/nginx.crt
   when: nginx_certificate.changed
+  shell: openssl enc -aes-256-cbc -salt -d -in /etc/nginx/ssl/nginx.crt.enc -out /etc/nginx/ssl/nginx.crt -k {{ secrets_password }}; chmod 640 /etc/nginx/ssl/nginx.crt
 
 - name: Upload encrypted nginx SSL private key
+  when: ssl_enabled
   copy: src=nginx.key.enc dest=/etc/nginx/ssl/nginx.key.enc mode=640
   register: nginx_private_key
 
 - name: Decrypt nginx SSL private key
-  shell: openssl enc -aes-256-cbc -salt -d -in /etc/nginx/ssl/nginx.key.enc -out /etc/nginx/ssl/nginx.key -k {{ secrets_password }}; chmod 640 /etc/nginx/ssl/nginx.key
   when: nginx_private_key.changed
+  shell: openssl enc -aes-256-cbc -salt -d -in /etc/nginx/ssl/nginx.key.enc -out /etc/nginx/ssl/nginx.key -k {{ secrets_password }}; chmod 640 /etc/nginx/ssl/nginx.key
 
 - name: Enable GroupEat site
   file: src=/etc/nginx/sites-available/groupeat dest=/etc/nginx/sites-enabled/groupeat state=link

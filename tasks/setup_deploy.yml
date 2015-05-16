@@ -1,0 +1,31 @@
+---
+- name: Check if API is already deployed
+  stat: path=~vagrant/api
+  register: api
+
+- name: Setup API
+  when: api.stat.exists == false
+  local_action: shell cd ../groupeat-api; rocketeer setup --on={{ deploy_connection }}
+  sudo: false
+
+- name: Deploy API
+  when: api.stat.exists == false
+  local_action: shell cd ../groupeat-api; rocketeer deploy --on={{ deploy_connection }} --branch={{ deploy_branch }}
+  sudo: false
+
+- name: Install database
+  when: api.stat.exists == false
+  shell: php artisan db:install --force --seed
+  args:
+    chdir: ~vagrant/api/current
+  sudo: true
+  sudo_user: vagrant
+
+- name: Check if frontend is already deployed
+  stat: path=~vagrant/frontend
+  register: frontend
+
+- name: Deploy frontend
+  when: frontend.stat.exists == false
+  local_action: shell cd ../groupeat-frontend; gulp deploy --{{ deploy_connection }}
+  sudo: false

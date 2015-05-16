@@ -7,7 +7,7 @@
   register: apns_certificate
 
 - name: Decrypt nginx SSL private key
-  shell: openssl enc -aes-256-cbc -salt -d -in ~vagrant/APNS.pem.enc -out ~vagrant/APNS.pem -k {{ secrets_password }}; chmod 640 ~vagrant/APNS.pem
   when: apns_certificate.changed
+  shell: openssl enc -aes-256-cbc -salt -d -in ~vagrant/APNS.pem.enc -out ~vagrant/APNS.pem -k {{ secrets_password }}; chmod 640 ~vagrant/APNS.pem
   sudo: yes
   sudo_user: vagrant

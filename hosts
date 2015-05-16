@@ -1,1 +1,18 @@
-PizzeriaProd ansible_ssh_host=178.62.158.190
+groupeat.fr
+staging.groupeat.fr
+
+[production]
+groupeat.fr
+
+[staging]
+staging.groupeat.fr
+
+[production:vars]
+deploy_connection=production
+deploy_branch=master
+ssl_enabled=True
+
+[staging:vars]
+deploy_connection=staging
+deploy_branch=develop
+ssl_enabled=False

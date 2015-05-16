@@ -18,9 +18,9 @@
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main' state=present
 
 - name: Update package lists
-  apt: update_cache=yes cache_valid_time={{ apt_update_cache_time_in_seconds }}
   when: apt_update
+  apt: update_cache=yes cache_valid_time={{ apt_update_cache_time_in_seconds }}
 
 - name: Upgrade packages
-  apt: upgrade=safe
   when: apt_update
+  apt: upgrade=safe

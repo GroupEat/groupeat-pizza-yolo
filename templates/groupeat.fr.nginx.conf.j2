@@ -49,57 +49,10 @@ server {
     location = /favicon.ico { access_log off; log_not_found on; }
     location = /robots.txt  { access_log off; log_not_found on; }
 
-    access_log /var/log/nginx/access.log;
-    error_log  /var/log/nginx/error.log error;
-
     # Indicating the path to the ssl certificates
     ssl_certificate /etc/nginx/ssl/nginx.crt;
     ssl_certificate_key /etc/nginx/ssl/nginx.key;
 
-    # Enabling session resumption to improve HTTPS performance
-    ssl_session_cache shared:SSL:20m;
-    ssl_session_timeout 10m;
-
-    # Disabling SSLv3 since it's less secure then TLS
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-
-    # Optimizing the cipher suites
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;
-
-    # Enabling gzip compression
-    gzip on;
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_comp_level 6;
-    gzip_buffers 16 8k;
-    gzip_disable "MSIE [1-6]\.(?!.*SV1)";
-    gzip_types text/plain text/css text/xml application/json application/x-javascript;
-
-    # Tweaking buffers
-    client_max_body_size 8m;
-    client_body_buffer_size 10K;
-    client_header_buffer_size 1k;
-    large_client_header_buffers 2 1k;
-
-    # Setting proper timeouts
-    client_body_timeout 12;
-    client_header_timeout 12;
-    keepalive_timeout 15;
-    send_timeout 10;
-
     # Disabling sendfile as it seems to be slow on Digital Ocean
     sendfile off;
 }
-
-# Removing the nginx version number from error pages and server header
-server_tokens off;
-
-# Disallowing the browser to render the page inside a frame or an iframe
-add_header X-Frame-Options SAMEORIGIN;
-
-# Disabling content-type sniffing on some browsers.
-add_header X-Content-Type-Options nosniff;
-
-# Enabling the cross-site scripting (XSS) filter
-add_header X-XSS-Protection "1; mode=block";
