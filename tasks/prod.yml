@@ -21,8 +21,8 @@
 - include: setup_crontab.yml
 - include: setup_papertrail.yml
 - include: setup_postgresql.yml
-- include: setup_shippable.yml
+- include: setup_ci.yml tags=ssh
 - include: setup_security.yml tags=security
 - include: setup_laravel_env.yml tags=deploy
-- include: setup_github.yml
+- include: setup_github.yml tags=ssh
 - include: setup_deploy.yml tags=deploy
