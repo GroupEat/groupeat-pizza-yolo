@@ -8,11 +8,13 @@ groupeat.fr
 staging.groupeat.fr
 
 [production:vars]
+app_env=production
 deploy_connection=production
 deploy_branch=master
 ssl_enabled=True
 
 [staging:vars]
+app_env=staging
 deploy_connection=staging
 deploy_branch=develop
 ssl_enabled=False
