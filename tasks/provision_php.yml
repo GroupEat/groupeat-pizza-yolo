@@ -26,7 +26,7 @@
   failed_when: "mailparse_result.stderr or ('ERROR' in mailparse_result.stdout)"
 
 - name: Create mailparse.ini file
-  template: src=templates/mailparse.ini.j2 dest=/etc/php5/mods-available/mailparse.ini mode=644
+  template: src=templates/mailparse.ini.j2 dest=/etc/php5/mods-available/mailparse.ini mode=640
 
 - name: Enable Mailparse
   file: src=/etc/php5/mods-available/mailparse.ini dest=/etc/php5/cli/conf.d/20-mailparse.ini state=link
@@ -37,4 +37,4 @@
     creates: /usr/local/bin/composer
 
 - name: Upload php.ini for CLI
-  template: src=templates/php_cli.ini.j2 dest=/etc/php5/cli/php.ini mode=644
+  template: src=templates/php_cli.ini.j2 dest=/etc/php5/cli/php.ini mode=640

@@ -13,18 +13,24 @@
   notify: Restart nginx
 
 - name: Upload php.ini file
-  template: src=templates/php_fpm.ini.j2 dest=/etc/php5/fpm/php.ini mode=644
+  template: src=templates/php_fpm.ini.j2 dest=/etc/php5/fpm/php.ini mode=640
 
 - name: Upload fastcgi_params file
-  template: src=templates/fastcgi_params.j2 dest=/etc/nginx/fastcgi_params mode=644
+  template: src=templates/fastcgi_params.j2 dest=/etc/nginx/fastcgi_params mode=640
 
 - name: Upload nginx.conf file
-  template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf mode=644
+  template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf mode=640
   notify:
     - Restart nginx
 
 - name: Upload www.conf file
-  template: src=templates/www.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf mode=644
+  template: src=templates/www.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf mode=640
+
+- name: Restrict access to sites available
+  file: path=/etc/nginx/sites-available state=directory mode=750
+
+- name: Restrict access to sites enabled
+  file: path=/etc/nginx/sites-enabled state=directory mode=750
 
 - name: List vagrant user groups
   shell: groups vagrant
