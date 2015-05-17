@@ -15,15 +15,15 @@
   template: src=composer_auth.json.j2 dest=~vagrant/.composer/auth.json group=vagrant owner=vagrant
 
 - name: Upload RSA public key for GitHub
-  template: src=github_id_rsa.pub.j2 dest=~vagrant/.ssh/github_id_rsa.pub group=vagrant owner=vagrant mode=644
+  template: src=id_github_rsa.pub.j2 dest=~vagrant/.ssh/id_github_rsa.pub group=vagrant owner=vagrant mode=644
 
 - name: Upload encrypted RSA private key for GitHub
-  copy: src=github_id_rsa.enc dest=~vagrant/.ssh/github_id_rsa.enc group=vagrant owner=vagrant mode=600
+  copy: src=id_github_rsa.enc dest=~vagrant/.ssh/id_github_rsa.enc group=vagrant owner=vagrant mode=600
   register: github_rsa_private
 
 - name: Decrypt RSA private key for GitHub
   when: github_rsa_private.changed
-  shell: openssl enc -aes-256-cbc -salt -d -in ~vagrant/.ssh/github_id_rsa.enc -out ~vagrant/.ssh/github_id_rsa -k {{ secrets_password }}; chmod 600 ~vagrant/.ssh/github_id_rsa
+  shell: openssl enc -aes-256-cbc -salt -d -in ~vagrant/.ssh/id_github_rsa.enc -out ~vagrant/.ssh/id_github_rsa -k {{ secrets_password }}; chmod 600 ~vagrant/.ssh/id_github_rsa
   sudo: yes
   sudo_user: vagrant
 
