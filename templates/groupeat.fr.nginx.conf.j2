@@ -29,9 +29,9 @@ server {
         fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
         fastcgi_param SCRIPT_NAME /index.php;
         fastcgi_intercept_errors off;
-        add_header 'Access-Control-Allow-Origin' '*';
-        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS';
-        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent';
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent' always;
     }
 
     location /db {
