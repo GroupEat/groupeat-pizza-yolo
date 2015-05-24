@@ -5,7 +5,7 @@
   sudo_user: postgres
 
 - name: Create groupeat user and grant him access to the db
-  postgresql_user: db=groupeat name=groupeat password={{ pgsql_password }} state=present role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
+  postgresql_user: db=groupeat name=groupeat password={{ staging_pgsql_password if app_env == 'staging' else production_pgsql_password }} state=present role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
   notify: Restart postgresql
   sudo: yes
   sudo_user: postgres

@@ -5,7 +5,7 @@
 - include: provision_php.yml
 - include: provision_php_apcu.yml
 - include: provision_nginx_php_fpm.yml tags=nginx
-- include: provision_postgresql.yml
+- include: provision_postgresql.yml tags=pgsql
 - include: provision_beanstalk.yml
 - include: provision_aglio.yml
 - include: provision_supervisor.yml
@@ -20,7 +20,7 @@
 - include: setup_queues.yml
 - include: setup_crontab.yml
 - include: setup_papertrail.yml
-- include: setup_postgresql.yml
+- include: setup_postgresql.yml tags=pgsql
 - include: setup_ci.yml tags=ssh
 - include: setup_security.yml tags=security
 - include: setup_laravel_env.yml tags=deploy

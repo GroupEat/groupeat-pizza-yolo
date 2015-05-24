@@ -4,7 +4,7 @@
     - include: tasks/dev.yml
   remote_user: root
   vars_files:
-    - vars/main.yml
     - vars/secrets.yml
+    - vars/main.yml
   roles:
     - { role: . }
