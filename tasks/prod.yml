@@ -6,20 +6,20 @@
 - include: provision_php_apcu.yml
 - include: provision_nginx_php_fpm.yml tags=nginx
 - include: provision_postgresql.yml tags=pgsql
-- include: provision_beanstalk.yml
+- include: provision_beanstalk.yml tags=monitoring
 - include: provision_aglio.yml
-- include: provision_supervisor.yml
+- include: provision_supervisor.yml tags=monitoring
 - include: provision_zsh.yml
-- include: provision_rsyslog.yml
+- include: provision_rsyslog.yml tags=monitoring
 - include: provision_security.yml tags=security
 - include: setup_locale.yml
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
 - include: setup_nginx.yml tags=nginx
-- include: setup_queues.yml
-- include: setup_crontab.yml
-- include: setup_papertrail.yml
+- include: setup_queues.yml tags=monitoring
+- include: setup_crontab.yml tags=monitoring
+- include: setup_papertrail.yml tags=monitoring
 - include: setup_postgresql.yml tags=pgsql
 - include: setup_ci.yml tags=ssh
 - include: setup_security.yml tags=security

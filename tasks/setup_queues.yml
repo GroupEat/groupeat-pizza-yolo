@@ -1,4 +1,7 @@
 ---
+- name: Start supervisor
+  service: name=supervisor state=started
+
 - name: Create directory for supervisor logs
   file: path=/var/log/queues state=directory
 
