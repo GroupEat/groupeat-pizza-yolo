@@ -1,4 +1,4 @@
 ---
-- name: Install Beanstlalk
+- name: Install Beanstalk
   apt: name=beanstalkd state=present
   notify: Restart beanstalk
