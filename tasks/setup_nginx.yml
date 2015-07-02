@@ -8,4 +8,3 @@
   file: src=/etc/nginx/sites-available/groupeat dest=/etc/nginx/sites-enabled/groupeat state=link
   notify:
     - Restart nginx
-    - Restart php-fpm
