@@ -4,7 +4,7 @@ echo "Cd into project root"
 cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 projectRoot=$( pwd )
 
-echo "Pulling changes from groupeat-vagrant"
+echo "Pulling changes from groupeat-pizza-yolo"
 git pull
 
 echo "Pulling changes from groupeat-api"
