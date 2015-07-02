@@ -16,6 +16,8 @@
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
+- include: setup_nginx_ssl.yml tags=nginx,security
+  when: ssl_enabled
 - include: setup_nginx.yml tags=nginx
 - include: setup_queues.yml tags=monitoring
 - include: setup_crontab.yml tags=monitoring
@@ -24,5 +26,6 @@
 - include: setup_ci.yml tags=ssh
 - include: setup_security.yml tags=security
 - include: setup_laravel_env.yml tags=deploy
+- include: setup_apns.yml
 - include: setup_github.yml tags=ssh
 - include: setup_deploy.yml tags=deploy

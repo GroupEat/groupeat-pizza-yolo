@@ -10,4 +10,8 @@
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
+- include: setup_nginx.yml
+- include: setup_crontab.yml
 - include: setup_php_no_cache.yml
+- include: setup_postgresql.yml
+- include: setup_laravel_env.yml

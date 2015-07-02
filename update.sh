@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "Cd into project root"
+cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+projectRoot=$( pwd )
+
+echo "Pulling changes from groupeat-vagrant"
+git pull
+
+echo "Pulling changes from groupeat-api"
+cd ../groupeat-api; git pull;
+
+echo "Pulling changes from groupeat-frontend"
+cd ../groupeat-frontend; git pull;
+
+echo "Cd into project root"
+cd $projectRoot
+
+echo "Rebuilding"
+./rebuild.sh

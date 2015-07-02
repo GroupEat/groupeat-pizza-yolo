@@ -1,21 +1,8 @@
 server {
   listen 80;
-  server_name groupeat.fr;
-
-  location /api/ {
-    return 400;
-  }
-
-  location / {
-    return 301 https://$server_name$request_uri;
-  }
-}
-
-server {
-  listen 443 ssl spdy default deferred;
-  server_name groupeat.fr;
+  server_name groupeat.dev;
   root /home/vagrant/frontend/dist;
-  index index.html index.php;
+
   charset utf-8;
 
   location / {
@@ -34,6 +21,15 @@ server {
     add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent' always;
   }
 
+  location /__clockwork {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
+    fastcgi_param SCRIPT_NAME /index.php;
+    fastcgi_intercept_errors off;
+  }
+
   location /db {
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
     fastcgi_pass unix:/var/run/php5-fpm.sock;
@@ -49,10 +45,6 @@ server {
   location = /favicon.ico { access_log off; log_not_found on; }
   location = /robots.txt  { access_log off; log_not_found on; }
 
-  # Indicating the path to the ssl certificates
-  ssl_certificate /etc/nginx/ssl/nginx.crt;
-  ssl_certificate_key /etc/nginx/ssl/nginx.key;
-
-  # Disabling sendfile as it seems to be slow on Digital Ocean
-  sendfile off;
+  access_log /var/log/nginx/access.log;
+  error_log  /var/log/nginx/error.log error;
 }

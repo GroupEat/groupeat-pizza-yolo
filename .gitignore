@@ -1,5 +1,5 @@
+.vagrant
+.composer
+.vault_pass
 .DS_Store
 Thumbs.db
-.vagrant
-.vault_pass
-package.box

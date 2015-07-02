@@ -22,7 +22,7 @@
   notify: Add ssh missing keys
 
 - name: Reconfigure timezone
-  shell: dpkg-reconfigure -f noninteractive tzdata
+  shell: dpkg-reconfigure --frontend noninteractive tzdata
 
 - name: Add ssh missing keys
   shell: ssh-keygen -A

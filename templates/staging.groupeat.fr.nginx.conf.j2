@@ -1,42 +1,42 @@
 server {
-    listen 80;
-    server_name staging.groupeat.fr;
+  listen 80;
+  server_name staging.groupeat.fr;
 
-    root /home/vagrant/frontend/dist;
-    index index.html index.php;
-    charset utf-8;
+  root /home/vagrant/frontend/dist;
+  index index.html index.php;
+  charset utf-8;
 
-    location / {
-        try_files $uri /index.html;
-    }
+  location / {
+    try_files $uri /index.html;
+  }
 
-    location /api/ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
-        fastcgi_param SCRIPT_NAME /index.php;
-        fastcgi_intercept_errors off;
-        add_header 'Access-Control-Allow-Origin' '*' always;
-        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS' always;
-        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent' always;
-    }
+  location /api/ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
+    fastcgi_param SCRIPT_NAME /index.php;
+    fastcgi_intercept_errors off;
+    add_header 'Access-Control-Allow-Origin' '*' always;
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS' always;
+    add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent' always;
+  }
 
-    location /db {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/storage/app/adminer.php;
-        fastcgi_intercept_errors off;
-    }
+  location /db {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/storage/app/adminer.php;
+    fastcgi_intercept_errors off;
+  }
 
-    location /adminer.css {
-        alias /home/vagrant/api/current/storage/app/adminer.css;
-    }
+  location /adminer.css {
+    alias /home/vagrant/api/current/storage/app/adminer.css;
+  }
 
-    location = /favicon.ico { access_log off; log_not_found on; }
-    location = /robots.txt  { access_log off; log_not_found on; }
+  location = /favicon.ico { access_log off; log_not_found on; }
+  location = /robots.txt  { access_log off; log_not_found on; }
 
-    # Disabling sendfile as it seems to be slow on Digital Ocean
-    sendfile off;
+  # Disabling sendfile as it seems to be slow on Digital Ocean
+  sendfile off;
 }

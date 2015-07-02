@@ -1,13 +1,3 @@
 ---
 - name: Upload Laravel .env file
-  template: src=templates/env.j2 dest=~vagrant/.env group=vagrant owner=vagrant mode=640
-
-- name: Upload encrypted APNS certificate
-  copy: src=APNS.pem.enc dest=~vagrant/APNS.pem.enc group=vagrant owner=vagrant mode=640
-  register: apns_certificate
-
-- name: Decrypt nginx SSL private key
-  when: apns_certificate.changed
-  shell: openssl enc -aes-256-cbc -salt -d -in ~vagrant/APNS.pem.enc -out ~vagrant/APNS.pem -k {{ secrets_password }}; chmod 640 ~vagrant/APNS.pem
-  sudo: yes
-  sudo_user: vagrant
+  template: src=templates/{{ 'groupeat.dev.' if (inventory_hostname == 'groupeat.dev') else '' }}env.j2 dest=~vagrant/.env group=vagrant owner=vagrant mode=640
