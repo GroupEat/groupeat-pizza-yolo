@@ -4,6 +4,11 @@
   sudo: yes
   sudo_user: postgres
 
+- name: Enable the PostGIS extension
+  postgresql_ext: name=postgis db=groupeat
+  sudo: yes
+  sudo_user: postgres
+
 - name: Create groupeat user and grant him access to the db
   postgresql_user: db=groupeat name=groupeat password={{ staging_pgsql_password if app_env == 'staging' else (production_pgsql_password if app_env == 'production' else 'groupeat') }} state=present role_attr_flags=SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
   notify: Restart postgresql

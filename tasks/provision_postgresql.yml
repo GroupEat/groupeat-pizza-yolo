@@ -6,3 +6,4 @@
     - python-psycopg2
     - postgresql-9.4
     - postgresql-contrib-9.4
+    - postgresql-9.4-postgis-2.1
