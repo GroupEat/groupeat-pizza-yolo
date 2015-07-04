@@ -1,6 +1,3 @@
 ---
-- name: Add Shippable RSA key to vagrant authorized keys
-  authorized_key: user=vagrant key="{{ shippable_public_key }}" state=present
-
 - name: Add Circle CI RSA key to vagrant authorized keys
   authorized_key: user=vagrant key="{{ circle_ci_public_key }}" state=present
