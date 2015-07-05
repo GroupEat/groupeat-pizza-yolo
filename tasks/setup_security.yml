@@ -23,3 +23,6 @@
 
 - name: Allow HTTPS traffic
   ufw: rule=allow port=443 proto=tcp
+
+- name: Allow PostgreSQL external connection
+  ufw: rule=allow port=5432 proto=tcp
