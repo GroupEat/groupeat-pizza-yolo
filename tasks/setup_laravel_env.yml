@@ -1,3 +1,4 @@
 ---
 - name: Upload Laravel .env file
   template: src=templates/{{ 'groupeat.dev.' if (inventory_hostname == 'groupeat.dev') else '' }}env.j2 dest=~vagrant/.env group=vagrant owner=vagrant mode=640
+  notify: Recache Laravel config
