@@ -15,7 +15,7 @@
 - name: Setup ufw to allow outgoing packages by default
   ufw: state=enabled policy=allow direction=outgoing
 
-- name: Allow ssh traffic
+- name: Allow SSH traffic
   ufw: rule=allow port=22 proto=tcp
 
 - name: Allow HTTP traffic
