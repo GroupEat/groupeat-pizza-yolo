@@ -1,4 +1,7 @@
 ---
+- name: Restart sysctl
+  command: sysctl -p
+
 - name: Restart nginx
   service: name=nginx state=restarted
 
