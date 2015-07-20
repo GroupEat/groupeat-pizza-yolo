@@ -8,8 +8,11 @@
 - name: Add PHP repository
   apt_repository: repo='ppa:ondrej/php5-5.6' state=present
 
+- name: Add NodeSource GPG key
+  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+
 - name: Add Node.js repository
-  apt_repository: repo='ppa:chris-lea/node.js' state=present
+  apt_repository: repo='deb https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main' state=present
 
 - name: Add PostgreSQL apt key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
@@ -23,4 +26,4 @@
 
 - name: Upgrade packages
   when: apt_update
-  apt: upgrade=safe
+  apt: upgrade=full force=yes
