@@ -1,6 +1,6 @@
 ---
 - name: Clone Oh-my-zsh for {{ user }} user
-  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~{{ user }}/.oh-my-zsh depth=1 update=no
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~{{ user }}/.oh-my-zsh
   sudo: yes
   sudo_user: "{{ user }}"
 
