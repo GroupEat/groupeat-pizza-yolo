@@ -73,9 +73,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Installing the API dependencies
     machine.vm.provision "shell", inline: "cd ~vagrant/api/current; composer install", privileged: false
 
-    # Creating the migrations table
-    machine.vm.provision "shell", inline: "cd ~vagrant/api/current; php artisan migrate:install", privileged: false
-
     # Running the migrations
     machine.vm.provision "shell", inline: "cd ~vagrant/api/current; php artisan migrate --seed", privileged: false
 

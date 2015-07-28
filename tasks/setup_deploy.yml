@@ -13,14 +13,6 @@
   local_action: shell cd ../groupeat-api; rocketeer deploy --on={{ deploy_connection }} --branch={{ deploy_branch }}
   sudo: false
 
-- name: Create migrations table
-  when: api.stat.exists == false
-  shell: php artisan migrate:install
-  args:
-    chdir: ~vagrant/api/current
-  sudo: true
-  sudo_user: vagrant
-
 - name: Run migrations
   when: api.stat.exists == false
   shell: php artisan migrate --seed --force
