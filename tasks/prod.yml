@@ -10,14 +10,14 @@
 - include: provision_beanstalk.yml tags=monitoring
 - include: provision_aglio.yml
 - include: provision_supervisor.yml tags=monitoring
-- include: provision_zsh.yml
+- include: provision_zsh.yml tags=zsh
 - include: provision_rsyslog.yml tags=monitoring
 - include: provision_security.yml tags=security
 - include: setup_locale.yml
 - include: setup_locale_reboot.yml
 - include: setup_timezone.yml
-- include: setup_oh_my_zsh.yml user=root
-- include: setup_oh_my_zsh.yml user=vagrant
+- include: setup_oh_my_zsh.yml user=root tags=zsh
+- include: setup_oh_my_zsh.yml user=vagrant tags=zsh
 - include: setup_nginx_ssl.yml tags=nginx,security
   when: ssl_enabled
 - include: setup_nginx.yml tags=nginx
