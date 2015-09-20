@@ -26,3 +26,9 @@
 
 - name: Allow PostgreSQL external connection
   ufw: rule=allow port=5432 proto=tcp
+
+- name: Allow APNS inbound traffic
+  ufw: rule=allow port=2195 proto=tcp
+
+- name: Allow APNS feedback inbound traffic
+  ufw: rule=allow port=2196 proto=tcp
