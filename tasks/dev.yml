@@ -5,13 +5,16 @@
 - include: provision_php_xdebug.yml
 - include: provision_nginx_php_fpm.yml
 - include: provision_postgresql.yml
+- include: provision_beanstalk.yml
 - include: provision_aglio.yml
+- include: provision_supervisor.yml
 - include: provision_zsh.yml
 - include: setup_locale.yml
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root
 - include: setup_oh_my_zsh.yml user=vagrant
 - include: setup_nginx.yml
+- include: setup_queues.yml
 - include: setup_crontab.yml
 - include: setup_php_no_cache.yml
 - include: setup_postgresql.yml

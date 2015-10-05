@@ -1,6 +1,6 @@
 [program:groupeat]
 directory=/home/vagrant/api/current
-command=/usr/bin/php artisan queue:listen
+command=/usr/bin/php artisan queue:listen --tries=3 --sleep=3
 autostart=true
 autorestart=true
 startretries=3
