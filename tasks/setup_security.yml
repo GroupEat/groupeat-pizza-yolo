@@ -32,3 +32,6 @@
 
 - name: Allow APNS feedback inbound traffic
   ufw: rule=allow port=2196 proto=tcp
+
+- name: Allow Socket.IO traffic
+  ufw: rule=allow port=3000 proto=tcp
