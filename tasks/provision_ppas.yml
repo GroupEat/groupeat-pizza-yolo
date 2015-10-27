@@ -12,7 +12,7 @@
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
 
 - name: Add Node.js repository
-  apt_repository: repo='deb https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main' state=present
+  apt_repository: repo='deb https://deb.nodesource.com/node_4.x {{ ansible_distribution_release }} main' state=present
 
 - name: Add PostgreSQL apt key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
