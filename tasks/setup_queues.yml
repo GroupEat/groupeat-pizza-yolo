@@ -5,8 +5,8 @@
 - name: Create directory for supervisor logs
   file: path=/var/log/queues state=directory
 
-- name: Authorize vagrant user to restart the groupeat queue
-  lineinfile: dest=/etc/sudoers line="vagrant ALL = (root) NOPASSWD:/usr/bin/supervisorctl restart groupeat" state=present
+- name: Authorize vagrant user to restart the queues
+  lineinfile: dest=/etc/sudoers line="vagrant ALL = (root) NOPASSWD:/usr/bin/supervisorctl restart all" state=present
 
 - name: Upload queues config
   template: src=templates/queues.j2 dest=/etc/supervisor/conf.d/queues.conf mode=640

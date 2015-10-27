@@ -1,9 +1,19 @@
-[program:groupeat]
+[program:api-queue]
 directory=/home/vagrant/api/current
 command=/usr/bin/php artisan queue:listen --tries=3 --sleep=3
 autostart=true
 autorestart=true
 startretries=3
-stdout_logfile=/var/log/queues/groupeat.out.log
-stderr_logfile=/var/log/queues/groupeat.err.log
+stdout_logfile=/var/log/queues/api-queue.out.log
+stderr_logfile=/var/log/queues/api-queue.err.log
+user=vagrant
+
+[program:api-broadcasting]
+directory=/home/vagrant/api/current
+command=/usr/bin/node broadcasting.js
+autostart=true
+autorestart=true
+startretries=3
+stdout_logfile=/var/log/queues/api-broadcasting.out.log
+stderr_logfile=/var/log/queues/api-broadcasting.err.log
 user=vagrant

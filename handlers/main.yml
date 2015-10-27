@@ -5,9 +5,6 @@
 - name: Restart nginx
   service: name=nginx state=restarted
 
-- name: Restart beanstalk
-  service: name=beanstalkd state=restarted
-
 - name: Restart groupeat queues
   supervisorctl: name=groupeat state=restarted
 
