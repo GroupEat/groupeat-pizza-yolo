@@ -38,11 +38,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Configuring the VM IP on the local private network
     machine.vm.network "private_network", ip: "192.168.10.10"
 
-    # Configuring port forwarding to the box
-    machine.vm.network "forwarded_port", guest: 80, host: 8000
-    machine.vm.network "forwarded_port", guest: 443, host: 44300
-    machine.vm.network "forwarded_port", guest: 5432, host: 54320
-
     # Copying the SSH private key to the box
     machine.vm.provision "shell" do |s|
       s.privileged = false
