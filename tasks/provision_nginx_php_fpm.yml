@@ -3,7 +3,7 @@
   apt: name=nginx state=present
 
 - name: Install PHP-FPM
-  apt: name=php5-fpm state=present
+  apt: name=php7.0-fpm state=present
 
 - name: Removing default site
   file: path={{ item }} state=absent
@@ -13,7 +13,7 @@
   notify: Restart nginx
 
 - name: Upload php.ini file
-  template: src=templates/php_fpm.ini.j2 dest=/etc/php5/fpm/php.ini mode=640
+  template: src=templates/php_fpm.ini.j2 dest=/etc/php/7.0/fpm/php.ini mode=640
 
 - name: Upload fastcgi_params file
   template: src=templates/fastcgi_params.j2 dest=/etc/nginx/fastcgi_params mode=640
@@ -24,7 +24,7 @@
     - Restart nginx
 
 - name: Upload www.conf file
-  template: src=templates/www.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf mode=640
+  template: src=templates/www.conf.j2 dest=/etc/php/7.0/fpm/pool.d/www.conf mode=640
 
 - name: Restrict access to sites available
   file: path=/etc/nginx/sites-available state=directory mode=750

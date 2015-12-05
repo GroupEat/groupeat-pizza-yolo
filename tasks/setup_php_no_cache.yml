@@ -1,3 +1,0 @@
----
-- name: Disable PHP OPcache
-  file: path=/etc/php5/mods-available/opcache.ini state=absent

@@ -4,7 +4,6 @@
 - include: provision_ppas.yml
 - include: provision_essentials.yml
 - include: provision_php.yml
-- include: provision_php_apcu.yml
 - include: provision_nginx_php_fpm.yml tags=nginx
 - include: provision_postgresql.yml tags=pgsql
 - include: provision_redis.yml tags=monitoring

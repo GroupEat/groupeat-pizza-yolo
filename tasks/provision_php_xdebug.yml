@@ -1,3 +1,0 @@
----
-- name: Install PHP Xdebug
-  apt: name=php5-xdebug state=present

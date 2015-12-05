@@ -12,7 +12,7 @@ server {
 
   location /api/ {
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
     fastcgi_param SCRIPT_NAME /index.php;
@@ -24,7 +24,7 @@ server {
 
   location /db {
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/storage/app/adminer.php;
     fastcgi_intercept_errors off;

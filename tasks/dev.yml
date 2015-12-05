@@ -2,7 +2,6 @@
 - include: provision_ppas.yml
 - include: provision_essentials.yml
 - include: provision_php.yml
-- include: provision_php_xdebug.yml
 - include: provision_nginx_php_fpm.yml
 - include: provision_postgresql.yml
 - include: provision_redis.yml
@@ -16,6 +15,5 @@
 - include: setup_nginx.yml
 - include: setup_queues.yml
 - include: setup_crontab.yml
-- include: setup_php_no_cache.yml
 - include: setup_postgresql.yml
 - include: setup_laravel_env.yml
