@@ -5,8 +5,8 @@
 - name: Restart nginx
   service: name=nginx state=restarted
 
-- name: Restart groupeat queues
-  supervisorctl: name=groupeat state=restarted
+- name: Restart queues
+  service: name=supervisor state=restarted
 
 - name: Restart rsyslog
   service: name=rsyslog state=restarted

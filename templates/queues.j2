@@ -17,3 +17,14 @@ startretries=3
 stdout_logfile=/var/log/queues/api-broadcasting.out.log
 stderr_logfile=/var/log/queues/api-broadcasting.err.log
 user=root
+
+[program:analytics]
+directory=/root
+command=sqlpad --port 8000
+autostart=true
+autorestart=true
+startretries=3
+stdout_logfile=/var/log/queues/analytics.out.log
+stderr_logfile=/var/log/queues/analytics.err.log
+user=root
+environment=HOME="/root"

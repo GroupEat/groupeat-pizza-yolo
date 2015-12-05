@@ -35,3 +35,6 @@
 
 - name: Allow Socket.IO traffic
   ufw: rule=allow port=3000 proto=tcp
+
+- name: Allow SqlPad traffic
+  ufw: rule=allow port=8000 proto=tcp

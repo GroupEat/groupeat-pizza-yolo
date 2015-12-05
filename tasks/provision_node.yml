@@ -7,3 +7,6 @@
 
 - name: Install Aglio globally
   npm: global=yes name=aglio production=yes state=present
+
+- name: Install SqlPad globally
+  npm: global=yes name=sqlpad production=yes state=present

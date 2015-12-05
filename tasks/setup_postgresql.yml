@@ -15,6 +15,18 @@
   sudo: yes
   sudo_user: postgres
 
+- name: Create analytics user and grant him restricted access to the db
+  postgresql_user: db=groupeat name=analytics password={{ staging_pgsql_password if app_env == 'staging' else (production_pgsql_password if app_env == 'production' else 'groupeat') }} state=present role_attr_flags=NOSUPERUSER,NOINHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION
+  notify: Restart postgresql
+  sudo: yes
+  sudo_user: postgres
+
+- name: Grant read only permission to analytics user
+  postgresql_privs: database=groupeat privs=SELECT objs=ALL_IN_SCHEMA schema=public roles=analytics grant_option=yes state=present
+  notify: Restart postgresql
+  sudo: yes
+  sudo_user: postgres
+
 - name: Upload PostgreSQL config
   template: src=templates/postgresql.conf.j2 dest=/etc/postgresql/9.4/main/postgresql.conf
   notify: Restart postgresql
