@@ -30,10 +30,12 @@ Since the API needs a lot of Composer dependencies, you need a token from GitHub
  - Clone the API and frontend repositories with the commands:
    - `git clone git@github.com:GroupEat/groupeat-api.git ../groupeat-api`
    - `git clone git@github.com:GroupEat/groupeat-frontend.git ../groupeat-frontend`
+   - `git clone git@github.com:GroupEat/groupeat-showcase.git ../groupeat-showcase`
  - Fill the missing data if any in `../groupeat-api/example.env` and copy this file to `../groupeat-api/.env`.
  - Add `192.168.10.10  groupeat.dev` to your hosts file.
  - Run the `vagrant box update` and `vagrant up` commands and wait for them to finish (a few minutes depending on your internet connection).
  - In the `groupeat-frontend` directory, install the dependencies with `npm install` and build with `gulp build`.
+ - In the `groupeat-showcase` directory, install the dependencies with `npm install`, `bower install` and build with `gulp release`.
  - Browse to http://groupeat.dev and make sure it works.
 
 # Updating
@@ -46,6 +48,7 @@ Since the API needs a lot of Composer dependencies, you need a token from GitHub
 
  - API: every bash command should be executed inside the VM. For that SSH into it with the `vagrant ssh` command.
  - Frontend: every bash command should be executed on the host machine (ie. directly on your OS). This is because the `gulp watch` task and Livereload do not play nicely with Vagrant.
+ - Showcase: every bash command should be executed on the host machine (ie. directly on your OS). This is because the `gulp dev` task and Livereload do not play nicely with Vagrant.
 
 ## Administration zone
 

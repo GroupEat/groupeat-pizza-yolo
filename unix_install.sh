@@ -18,6 +18,13 @@ else
     git clone git@github.com:GroupEat/groupeat-frontend.git ../groupeat-frontend
 fi
 
+if [ -d ../groupeat-showcase ]; then
+    echo "GroupEat showcase repository already exists"
+else
+    echo "Cloning GroupEat showcase repository"
+    git clone git@github.com:GroupEat/groupeat-showcase.git ../groupeat-showcase
+fi
+
 echo "Cd into groupeat-api"
 cd ../groupeat-api
 

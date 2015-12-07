@@ -14,11 +14,16 @@ server {
 server {
   listen 443 ssl spdy default deferred;
   server_name groupeat.fr;
-  root /home/vagrant/frontend/dist;
+  root /home/vagrant/showcase/build;
   index index.html index.php;
   charset utf-8;
 
   location / {
+    try_files $uri /index.html;
+  }
+
+  location /app/ {
+    alias /home/vagrant/frontend/dist;
     try_files $uri /index.html;
   }
 
