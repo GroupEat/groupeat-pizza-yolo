@@ -29,3 +29,12 @@
   when: frontend.stat.exists == false
   local_action: shell cd ../groupeat-frontend; gulp deploy --{{ deploy_connection }}
   sudo: false
+
+- name: Check if showcase is already deployed
+  stat: path=~vagrant/showcase
+  register: showcase
+
+- name: Deploy showcase
+  when: showcase.stat.exists == false
+  local_action: shell cd ../groupeat-showcase; gulp deploy --{{ deploy_connection }}
+  sudo: false

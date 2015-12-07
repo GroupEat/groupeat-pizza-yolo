@@ -15,6 +15,12 @@ cd ../groupeat-frontend
 npm install
 gulp build
 
+echo "Building the showcase"
+cd ../groupeat-showcase
+npm install
+bower install
+gulp release
+
 echo "Cd into project root"
 cd $projectRoot
 
