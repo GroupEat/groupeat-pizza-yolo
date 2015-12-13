@@ -12,8 +12,7 @@ vagrant provision
 
 echo "Building the frontend"
 cd ../groupeat-frontend
-npm install
-gulp build
+vagrant ssh -c "cd ~vagrant/frontend; npm install; gulp build"
 
 echo "Cd into project root"
 cd $projectRoot

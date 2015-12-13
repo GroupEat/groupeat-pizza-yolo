@@ -37,6 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Configuring the VM IP on the local private network
     machine.vm.network "private_network", ip: "192.168.10.10"
+    # Forwrad Livereload
+    machine.vm.network :forwarded_port, guest: 35729, host: 35729
 
     # Copying the SSH private key to the box
     machine.vm.provision "shell" do |s|
