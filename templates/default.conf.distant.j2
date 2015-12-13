@@ -1,6 +1,6 @@
 server {
   listen 80;
-  server_name groupeat.fr;
+  server_name {{ inventory_hostname }};
 
   location /api/ {
     return 400;
@@ -12,8 +12,8 @@ server {
 }
 
 server {
-  listen 443 ssl spdy default deferred;
-  server_name groupeat.fr;
+  listen 443 ssl http2 default deferred;
+  server_name {{ inventory_hostname }};
   root /home/vagrant/frontend/dist;
   index index.html index.php;
   charset utf-8;

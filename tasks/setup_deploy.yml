@@ -5,12 +5,12 @@
 
 - name: Setup API
   when: api.stat.exists == false
-  local_action: shell cd ../groupeat-api; rocketeer setup --on={{ deploy_connection }}
+  local_action: shell cd ../groupeat-api; rocketeer setup --on={{ env }}
   sudo: false
 
 - name: Deploy API
   when: api.stat.exists == false
-  local_action: shell cd ../groupeat-api; rocketeer deploy --on={{ deploy_connection }} --branch={{ deploy_branch }}
+  local_action: shell cd ../groupeat-api; rocketeer deploy --on={{ env }} --branch={{ env }}
   sudo: false
 
 - name: Run migrations
@@ -27,5 +27,5 @@
 
 - name: Deploy frontend
   when: frontend.stat.exists == false
-  local_action: shell cd ../groupeat-frontend; gulp deploy --{{ deploy_connection }}
+  local_action: shell cd ../groupeat-frontend; gulp deploy --{{ env }}
   sudo: false

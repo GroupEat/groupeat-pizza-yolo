@@ -5,13 +5,6 @@
 - name: Install PHP-FPM
   apt: name=php7.0-fpm state=present
 
-- name: Removing default site
-  file: path={{ item }} state=absent
-  with_items:
-    - /etc/nginx/sites-enabled/default
-    - /etc/nginx/sites-available/default
-  notify: Restart nginx
-
 - name: Upload php.ini file
   template: src=templates/php_fpm.ini.j2 dest=/etc/php/7.0/fpm/php.ini mode=640
 
@@ -25,12 +18,6 @@
 
 - name: Upload www.conf file
   template: src=templates/www.conf.j2 dest=/etc/php/7.0/fpm/pool.d/www.conf mode=640
-
-- name: Restrict access to sites available
-  file: path=/etc/nginx/sites-available state=directory mode=750
-
-- name: Restrict access to sites enabled
-  file: path=/etc/nginx/sites-enabled state=directory mode=750
 
 - name: List vagrant user groups
   shell: groups vagrant

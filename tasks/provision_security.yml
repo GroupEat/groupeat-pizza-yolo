@@ -7,3 +7,8 @@
 
 - name: Install unattended-upgrades
   apt: name=unattended-upgrades state=present
+
+- name: Clone letsencrypt repository
+  git: repo=https://github.com/letsencrypt/letsencrypt.git dest=/root/letsencrypt update=no
+  notify:
+    - Require letsencrypt certificate

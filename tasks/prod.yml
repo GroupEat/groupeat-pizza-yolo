@@ -3,6 +3,7 @@
 - include: provision_vagrant_user.yml
 - include: provision_ppas.yml
 - include: provision_essentials.yml
+- include: provision_security.yml tags=security
 - include: provision_php.yml
 - include: provision_nginx_php_fpm.yml tags=nginx
 - include: provision_postgresql.yml tags=pgsql
@@ -11,14 +12,11 @@
 - include: provision_supervisor.yml tags=monitoring
 - include: provision_zsh.yml tags=zsh
 - include: provision_rsyslog.yml tags=monitoring
-- include: provision_security.yml tags=security
 - include: setup_locale.yml
 - include: setup_locale_reboot.yml
 - include: setup_timezone.yml
 - include: setup_oh_my_zsh.yml user=root tags=zsh
 - include: setup_oh_my_zsh.yml user=vagrant tags=zsh
-- include: setup_nginx_ssl.yml tags=nginx,security
-  when: ssl_enabled
 - include: setup_nginx.yml tags=nginx
 - include: setup_queues.yml tags=monitoring
 - include: setup_crontab.yml tags=monitoring

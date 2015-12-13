@@ -1,10 +1,5 @@
 ---
-- name: Upload GroupEat site config
-  template: src=templates/{{ inventory_hostname }}.nginx.conf.j2 dest=/etc/nginx/sites-available/groupeat
-  notify:
-    - Restart nginx
-
-- name: Enable GroupEat site
-  file: src=/etc/nginx/sites-available/groupeat dest=/etc/nginx/sites-enabled/groupeat state=link
+- name: Upload GroupEat nginx config
+  template: src=templates/default.conf.{{ 'local' if (env == 'dev') else 'distant' }}.j2 dest=/etc/nginx/conf.d/default.conf
   notify:
     - Restart nginx

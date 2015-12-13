@@ -2,8 +2,11 @@
 - name: Install common software
   apt: name=software-properties-common state=present
 
+- name: Add nginx key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+
 - name: Add nginx repository
-  apt_repository: repo='ppa:nginx/stable' state=present
+  apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ {{ ansible_distribution_release }} nginx' state=present
 
 - name: Add PHP repository
   apt_repository: repo='ppa:ondrej/php-7.0' state=present

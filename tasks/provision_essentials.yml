@@ -16,4 +16,5 @@
     - htop
     - unzip
     - wget
+    - python
     - python-pygments

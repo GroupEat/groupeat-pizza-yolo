@@ -28,3 +28,6 @@
   shell: php /home/vagrant/api/current/artisan config:cache
   sudo: yes
   sudo_user: vagrant
+
+- name: Require letsencrypt certificate
+  shell: /root/letsencrypt/letsencrypt-auto certonly --standalone --redirect --duplicate --text --email tib.dex@gmail.com --agree-tos -d groupeat.fr -d www.groupeat.fr -d api.groupeat.fr -d app.groupeat.fr -d analytics.groupeat.fr -d restaurant.groupeat.fr -d blog.groupeat.fr -d docs.groupeat.fr
