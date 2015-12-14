@@ -11,11 +11,18 @@ else
     git clone git@github.com:GroupEat/groupeat-api.git ../groupeat-api
 fi
 
-if [ -d ../groupeat-frontend ]; then
-    echo "GroupEat frontend repository already exists"
+if [ -d ../groupeat-web-app ]; then
+    echo "GroupEat Web App repository already exists"
 else
-    echo "Cloning GroupEat frontend repository"
-    git clone git@github.com:GroupEat/groupeat-frontend.git ../groupeat-frontend
+    echo "Cloning GroupEat Web App repository"
+    git clone git@github.com:GroupEat/groupeat-web-app.git ../groupeat-web-app
+fi
+
+if [ -d ../groupeat-showcase ]; then
+    echo "GroupEat Showcase repository already exists"
+else
+    echo "Cloning GroupEat Showcase repository"
+    git clone git@github.com:GroupEat/groupeat-showcase.git ../groupeat-showcase
 fi
 
 echo "Cd into groupeat-api"
@@ -42,11 +49,21 @@ else
     echo "192.168.10.10  groupeat.dev" | sudo tee -a /etc/hosts
 fi
 
-echo "Rebuilding"
-./rebuild.sh
-
-echo "Updating Vagrant boxes"
-vagrant box update
+if grep -Fxqs "192.168.10.10  app.groupeat.dev" /etc/hosts; then
+    echo "/etc/hosts file already modified"
+else
+    echo "Adding '192.168.10.10  app.groupeat.dev' to /etc/hosts"
+    echo "192.168.10.10  app.groupeat.dev" | sudo tee -a /etc/hosts
+fi
 
 echo "Booting the VM"
 vagrant up
+
+echo "Building the Web App"
+vagrant ssh -c "cd ~vagrant/app; npm install; gulp build"
+
+echo "Building the Showcase"
+vagrant ssh -c "cd ~vagrant/showcase; npm install; gulp build"
+
+echo "SSH into the VM"
+vagrant ssh

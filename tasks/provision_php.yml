@@ -18,3 +18,6 @@
 
 - name: Upload php.ini for CLI
   template: src=templates/php_cli.ini.j2 dest=/etc/php/7.0/cli/php.ini mode=640
+
+- name: Authorize vagrant user to edit the PHP sessions
+  file: /var/lib/php/sessions owner=root group=vagrant mode=0775

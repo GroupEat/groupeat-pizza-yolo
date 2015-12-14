@@ -1,10 +1,9 @@
-server {
-  listen 80;
-  server_name {{ inventory_hostname }};
+charset utf-8;
+error_log  /var/log/nginx/error.log error;
 
-  location /api/ {
-    return 400;
-  }
+server {
+  listen 80 default_server;
+  server_name {{ inventory_hostname }};
 
   location / {
     return 301 https://$server_name$request_uri;
@@ -12,14 +11,27 @@ server {
 }
 
 server {
-  listen 443 ssl http2 default deferred;
-  server_name {{ inventory_hostname }};
-  root /home/vagrant/frontend/dist;
-  index index.html index.php;
-  charset utf-8;
+  listen 80;
+  server_name app.{{ inventory_hostname }};
 
   location / {
-    try_files $uri /index.html;
+    return 301 https://$server_name$request_uri;
+  }
+}
+
+server {
+  listen 443 ssl http2 default_server;
+  server_name {{ inventory_hostname }};
+
+  # Indicating the path to the ssl certificates
+  ssl_certificate /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
+
+  location / {
+    root /home/vagrant/showcase/current/dist;
+    index index.html;
+
+    access_log /var/log/nginx/access-showcase.log;
   }
 
   location /api/ {
@@ -32,6 +44,16 @@ server {
     add_header 'Access-Control-Allow-Origin' '*' always;
     add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS' always;
     add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, Keep-Alive, User-Agent' always;
+    access_log /var/log/nginx/access-api.log;
+  }
+
+  location /__clockwork {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/public/index.php;
+    fastcgi_param SCRIPT_NAME /index.php;
+    fastcgi_intercept_errors off;
   }
 
   location /db {
@@ -40,19 +62,37 @@ server {
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /home/vagrant/api/current/storage/app/adminer.php;
     fastcgi_intercept_errors off;
+    access_log /var/log/nginx/access-adminer.log;
   }
 
   location /adminer.css {
     alias /home/vagrant/api/current/storage/app/adminer.css;
   }
 
-  location = /favicon.ico { access_log off; log_not_found on; }
-  location = /robots.txt  { access_log off; log_not_found on; }
+  location /favicon.ico {
+    access_log off;
+    log_not_found on;
+  }
+}
+
+server {
+  listen 443 ssl http2;
+  server_name app.{{ inventory_hostname }};
+  root /home/vagrant/app/dist;
+  try_files $uri /index.html;
+  access_log /var/log/nginx/access-app.log;
 
   # Indicating the path to the ssl certificates
-  ssl_certificate /etc/nginx/ssl/nginx.crt;
-  ssl_certificate_key /etc/nginx/ssl/nginx.key;
+  ssl_certificate /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
 
-  # Disabling sendfile as it seems to be slow on Digital Ocean
-  sendfile off;
+  location /robots.txt  {
+    access_log off;
+    log_not_found on;
+  }
+
+  location /favicon.ico {
+    access_log off;
+    log_not_found on;
+  }
 }

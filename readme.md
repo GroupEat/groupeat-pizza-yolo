@@ -21,10 +21,6 @@ Since the API needs a lot of Composer dependencies, you need a token from GitHub
 
  - `./install.sh`
 
-# Updating
-
- - `./update.sh`
-
 # Local Usage
 
 ## Administration zone

@@ -33,11 +33,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Configuring the shared folders
     machine.vm.synced_folder Dir.pwd + "/../groupeat-api", "/home/vagrant/api/current", nfs: true
-    machine.vm.synced_folder Dir.pwd + "/../groupeat-frontend", "/home/vagrant/frontend", nfs: true
+    machine.vm.synced_folder Dir.pwd + "/../groupeat-web-app", "/home/vagrant/app", nfs: true
+    machine.vm.synced_folder Dir.pwd + "/../groupeat-showcase", "/home/vagrant/showcase/current", nfs: true
 
     # Configuring the VM IP on the local private network
     machine.vm.network "private_network", ip: "192.168.10.10"
-    # Forwrad Livereload
+    # Forward Livereload
     machine.vm.network :forwarded_port, guest: 35729, host: 35729
 
     # Copying the SSH private key to the box
