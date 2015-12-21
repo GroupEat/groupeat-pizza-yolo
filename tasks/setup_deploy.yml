@@ -21,11 +21,20 @@
   sudo: true
   sudo_user: vagrant
 
-- name: Check if frontend is already deployed
-  stat: path=~vagrant/frontend
-  register: frontend
+- name: Check if Web App is already deployed
+  stat: path=~vagrant/app
+  register: webApp
 
-- name: Deploy frontend
-  when: frontend.stat.exists == false
-  local_action: shell cd ../groupeat-frontend; gulp deploy --{{ env }}
+- name: Deploy Web App
+  when: webApp.stat.exists == false
+  local_action: shell cd ../groupeat-web-app; ./node_modules/.bin/gulp deploy --{{ env }}
+  sudo: false
+
+- name: Check if Showcase is already deployed
+  stat: path=~vagrant/showcase
+  register: showcase
+
+- name: Deploy Showcase
+  when: showcase.stat.exists == false
+  local_action: shell cd ../groupeat-showcase; ./node_modules/.bin/shipit {{ env }} deploy
   sudo: false
