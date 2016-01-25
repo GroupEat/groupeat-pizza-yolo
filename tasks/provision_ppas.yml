@@ -9,7 +9,7 @@
   apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ {{ ansible_distribution_release }} nginx' state=present
 
 - name: Add PHP repository
-  apt_repository: repo='ppa:ondrej/php-7.0' state=present
+  apt_repository: repo='ppa:ondrej/php' state=present
 
 - name: Add Redis repository
   apt_repository: repo='ppa:rwky/redis' state=present
