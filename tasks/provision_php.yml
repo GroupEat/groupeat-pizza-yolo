@@ -10,6 +10,7 @@
     - php7.0-imap
     - php7.0-intl
     - php7.0-dev
+    - php7.0-mcrypt
 
 - name: Install Composer
   shell: curl -sS https://getcomposer.org/installer | /usr/bin/php && /bin/mv -f composer.phar /usr/local/bin/composer
