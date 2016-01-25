@@ -8,7 +8,7 @@ server {
   location / {
     root /home/vagrant/showcase/current/dist;
     index index.html;
-
+    error_page 404 /404.html;
     access_log /var/log/nginx/access-showcase.log;
   }
 
