@@ -1,6 +1,6 @@
 ---
 - name: Upload encrypted APNS certificate
-  copy: src=apns.pem.enc dest=~vagrant/.apns.pem.enc group=vagrant owner=vagrant mode=640
+  copy: src={{ env }}.apns.pem.enc dest=~vagrant/.apns.pem.enc group=vagrant owner=vagrant mode=640
   register: apns_certificate
 
 - name: Decrypt APNS certificate
