@@ -36,3 +36,12 @@ Use the `groupeat` password on the local environment to access these pages.
 
  - Tweak the [inventory file](http://docs.ansible.com/intro_inventory.html) if needed.
  - Run the `ansible-playbook prod.yml -i hosts --ask-vault-pass -vv` command in the project root folder.
+
+# Ansible vault
+
+Ansible vault keeps all secret passwords and keys in a secure file. To read its content, you need to have in the current directory a `.vault_pass` file whose content is a password (ask about it to the team members if you don't know it):
+
+```
+echo <password> > .vault-pass
+ansible-vault --vault-password-file .vault_pass view vars/secrets.yml
+```
