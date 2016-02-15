@@ -24,11 +24,6 @@ http {
 
   # Enabling the cross-site scripting (XSS) filter
   add_header X-XSS-Protection "1; mode=block";
-  
-  ## Block malicious user agents
-  if ($http_user_agent ~* (Purebot|Lipperhey|MaMa CaSpEr|libwww-perl|Mail.Ru|gold crawler)) {
-    return 403;
-  }
 
   sendfile on;
   tcp_nopush on;
