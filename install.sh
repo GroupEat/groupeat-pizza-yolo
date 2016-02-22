@@ -60,10 +60,10 @@ echo "Booting the VM"
 vagrant up
 
 echo "Building the Web App"
-vagrant ssh -c "cd ~vagrant/app; npm install; gulp build"
+vagrant ssh -c "cd ~vagrant/app/current; npm install; npm run build"
 
 echo "Building the Showcase"
-vagrant ssh -c "cd ~vagrant/showcase; npm install; gulp build"
+vagrant ssh -c "cd ~vagrant/showcase/current; npm install; gulp build"
 
 echo "SSH into the VM"
 vagrant ssh
