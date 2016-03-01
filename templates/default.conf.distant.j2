@@ -24,8 +24,8 @@ server {
   server_name {{ inventory_hostname }};
 
   # Indicating the path to the ssl certificates
-  ssl_certificate /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/current/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/current/privkey.pem;
 
   location / {
     root /home/vagrant/showcase/current/dist;
@@ -83,8 +83,8 @@ server {
   access_log /var/log/nginx/access-app.log;
 
   # Indicating the path to the ssl certificates
-  ssl_certificate /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/current/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/current/privkey.pem;
 
   location /robots.txt  {
     access_log off;
