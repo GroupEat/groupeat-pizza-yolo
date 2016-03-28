@@ -1,4 +1,4 @@
 ---
 - name: Upload Laravel .env file
-  template: src=templates/env.{{ 'local' if (env == 'dev') else 'distant' }}.j2 dest=~vagrant/.env group=vagrant owner=vagrant mode=640
+  template: src=templates/env.{{ env }}.j2 dest=~vagrant/.env group=vagrant owner=vagrant mode=640
   notify: Recache Laravel config
